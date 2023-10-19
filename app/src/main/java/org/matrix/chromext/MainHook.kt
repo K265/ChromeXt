@@ -50,9 +50,10 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
       return
     }
     if (supportedPackages.contains(lpparam.packageName)) {
+      var isBromite = lpparam.packageName == "org.bromite.bromite"
       lpparam.classLoader
           .loadClass("org.chromium.ui.base.WindowAndroid")
-          .declaredConstructors[1]
+          .declaredConstructors[if (isBromite) 0 else 1]
           .hookAfter {
             Chrome.init(it.args[0] as Context, lpparam.packageName)
             initHooks(UserScriptHook)

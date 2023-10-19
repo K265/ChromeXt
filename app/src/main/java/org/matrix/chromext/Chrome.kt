@@ -38,6 +38,7 @@ object Chrome {
   var isEdge = false
   var isSamsung = false
   var isVivaldi = false
+  var isBromite = false
 
   val IO = Executors.newCachedThreadPool()
   val cookieStore = CookieManager().getCookieStore()
@@ -53,6 +54,8 @@ object Chrome {
     isEdge = packageName.startsWith("com.microsoft.emmx")
     isSamsung = packageName.startsWith("com.sec.android.app.sbrowser")
     isVivaldi = packageName == "com.vivaldi.browser"
+    isBromite = packageName == "org.bromite.bromite"
+
     @Suppress("DEPRECATION") val packageInfo = ctx.packageManager?.getPackageInfo(packageName, 0)
     Log.i("Package: ${packageName}, v${packageInfo?.versionName}")
 

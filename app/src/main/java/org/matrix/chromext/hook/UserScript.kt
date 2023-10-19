@@ -71,7 +71,7 @@ object UserScriptHook : BaseHook() {
     findMethod(proxy.chromeTabbedActivity, true) { name == "onResume" }
         .hookBefore { Chrome.init(it.thisObject as Context) }
 
-    findMethod(proxy.chromeTabbedActivity) { name == "onStop" }
+    findMethod(if (Chrome.isBromite) proxy.chromeActivity else proxy.chromeTabbedActivity) { name == "onStop" }
         .hookBefore {
           ScriptDbManager.updateScriptStorage()
           val cache = HttpResponseCache.getInstalled()

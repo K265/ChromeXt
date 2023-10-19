@@ -37,6 +37,8 @@ object UserScriptProxy {
       } else {
         Chrome.load("org.chromium.chrome.browser.ChromeTabbedActivity")
       }
+  val chromeActivity =
+      Chrome.load("org.chromium.chrome.browser.app.ChromeActivity")
   val tabImpl =
       if (Chrome.isSamsung) {
         tabWebContentsDelegateAndroidImpl
